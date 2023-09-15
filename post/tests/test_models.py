@@ -13,10 +13,10 @@ class PostModelTestClass(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        cls.user = User.objects.create_user(username='testuser', password='12345678')
-        cls.tag = Tag.objects.create(name='testtag')
-        cls.post = Post.objects.create(title='test title',
-                                       contents='test contents',
+        cls.user = User.objects.create_user(username='user', password='12345678')
+        cls.tag = Tag.objects.create(name='tag')
+        cls.post = Post.objects.create(title='title',
+                                       contents='contents',
                                        owner=cls.user)
         cls.post_tag = PostTag.objects.create(post=cls.post, tag=cls.tag)
 
