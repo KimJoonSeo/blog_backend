@@ -12,10 +12,14 @@ class PostTagSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     post_tags = serializers.SerializerMethodField()
+    cnt_of_comments = serializers.SerializerMethodField()
 
     def get_post_tags(self, post):
         post_tags_qs = PostTag.objects.filter(post=post)
         return PostTagSerializer(post_tags_qs, many=True).data
+
+    def get_cnt_of_comments(self, post):
+        return Comment.objects.filter(post=post).count()
 
     class Meta:
         model = Post
