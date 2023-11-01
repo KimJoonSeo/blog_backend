@@ -25,7 +25,7 @@ class PostSerializerTestClass(TestCase):
         self.serializer = PostSerializer(instance=self.post)
 
     def test_total_cnt_of_post_tags(self):
-        self.assertEqual(len(self.serializer.get_post_tags(self.post)), 3)
+        self.assertEqual(len(self.serializer.get_post_tags(self.post)), len(PostTag.objects.all()))
 
     def test_total_cnt_of_comments(self):
-        self.assertEqual(self.serializer.get_cnt_of_comments(self.post), 2)
+        self.assertEqual(self.serializer.get_cnt_of_comments(self.post), len(Comment.objects.all()))
