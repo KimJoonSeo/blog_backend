@@ -10,6 +10,7 @@ from post.models import Tag, Post, PostTag
 class PostAPIViewTestCase(APITestCase):
     auth_token_url = reverse("auth:token")
     post_list_url = reverse("post:list")
+    post_detail_url = reverse("post:detail", kwargs={"pk": 1})
     def setUp(self):
         self.username = "john"
         self.username2 = "park"
@@ -22,6 +23,7 @@ class PostAPIViewTestCase(APITestCase):
         self.post = Post.objects.create(title='title',
                                         contents='contents',
                                         owner=self.user)
+        self.post_id = self.post.id
         self.post2 = Post.objects.create(title='title2',
                                         contents='contents',
                                         owner=self.user)
@@ -39,7 +41,7 @@ class PostAPIViewTestCase(APITestCase):
 
     def test_post_list_api(self):
         """
-        Test to get post list
+        Test to verify post list api
         """
         headers = {
             'Authorization': 'Bearer ' + self.access_token1
